@@ -1,0 +1,8 @@
+{
+    "name": "com.needle.project-menu",
+    "displayName": "Needle Project Menu",
+    "version": "0.0.1-pre",
+    "dependencies": {
+        "com.unity.searcher" : "4.9.2"
+    }
+}
