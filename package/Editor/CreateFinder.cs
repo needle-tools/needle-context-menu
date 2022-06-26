@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using Needle;
@@ -13,7 +15,7 @@ internal static class CreateFinder
 
 	[BeforeOpenMenu]
 	[UsedImplicitly]
-	private static bool OpenFinder(EditorWindow window, IList<MenuItemInfo> items)
+	private static bool OpenFinder(Context context)
 	{
 		if (Event.current.modifiers.HasFlag(EventModifiers.Alt) == false) return true;
 		
@@ -21,14 +23,29 @@ internal static class CreateFinder
 		{
 			var db = new List<SearcherDatabaseBase>();
 			var list = new List<SearcherItem>();
-			foreach (var item in items)
-				list.Add(new SearcherItem(item.GUIContent.text));
-			db.Add(new SearcherDatabase(SearcherTreeUtility.CreateFromFlatList(list)));
-			searcher = new Searcher(db.ToArray(), new MyAdapter(""));
+			foreach (var item in context.Items)
+			{
+				var si = new SearcherItem(item.GUIContent.text);
+				si.UserData = item;
+				list.Add(si);
+			}
+			list = SearcherTreeUtility.CreateFromFlatList(list);
+			db.Add(new SearcherDatabase(list));
+			searcher = new Searcher(db.ToArray(), new MyAdapter(string.Empty));
 		}
 
 		typeof(SearcherWindow).GetField("s_Searcher", BindingFlags.Static | BindingFlags.NonPublic)?
 			.SetValue(null, searcher);
+		typeof(SearcherWindow).GetField("s_ItemSelectedDelegate", BindingFlags.Static | BindingFlags.NonPublic)?.SetValue(null, new Func<SearcherItem, bool>(
+			item =>
+			{
+				if (item != null && item.UserData is MenuItemInfo mi)
+				{
+					mi.Execute();
+					return true;
+				}
+				return false;
+			}));
 		var w = ScriptableObject.CreateInstance<SearcherWindow>();
 		var rect = w.position;
 		var p = Event.current.mousePosition;
@@ -43,6 +60,11 @@ internal static class CreateFinder
 		w.rootVisualElement.style.borderRightWidth = bw;
 		w.rootVisualElement.style.borderTopWidth = bw;
 		w.rootVisualElement.Query<VisualElement>("searcherVisualContainer").First().style.paddingTop = 6;
+		w.rootVisualElement.Query<VisualElement>("smartSearchItem").ForEach(i =>
+		{
+			Debug.Log(i.style.height);
+			i.style.height = 15;
+		});
 		w.Focus();
 		
 		Event.current.Use();

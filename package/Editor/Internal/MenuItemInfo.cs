@@ -1,6 +1,7 @@
 ﻿#nullable enable
 
 using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Needle
@@ -11,6 +12,11 @@ namespace Needle
 		public GUIContent GUIContent;
 		public event Func<MenuItemInfo, bool>? BeforeDisplay;
 		public event Func<bool>? BeforeInvoke;
+
+		public void Execute()
+		{
+			EditorApplication.ExecuteMenuItem(Path);
+		}
 
 		public MenuItemInfo(string path, GUIContent guiContent)
 		{

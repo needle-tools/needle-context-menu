@@ -3,12 +3,12 @@
 namespace Needle
 {
 	[AttributeUsage(AttributeTargets.Method)]
-	public sealed class ModifyMenuAttribute : Attribute
+	public sealed class LoadMenu : Attribute
 	{
 	}
 	
 	[AttributeUsage(AttributeTargets.Method)]
-	public sealed class BeforeOpenMenuAttribute : Attribute
+	public sealed class BeforeOpenMenu : Attribute
 	{
 	} 
 
