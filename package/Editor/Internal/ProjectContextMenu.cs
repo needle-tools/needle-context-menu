@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,8 +20,9 @@ namespace Needle
 		};
 
 		[InitializeOnLoadMethod]
-		private static void Init()
+		private static async void Init()
 		{
+			while(EditorApplication.isUpdating || EditorApplication.isCompiling) await Task.Delay(100);
 			EditorApplication.projectWindowItemOnGUI += OnGUI;
 			var allItems = MenuItemApi.GetProjectMenuItems();
 			var start = "Assets/".Length;
