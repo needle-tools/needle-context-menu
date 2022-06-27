@@ -1,8 +1,23 @@
 {
-    "name": "com.needle.project-menu",
-    "displayName": "Needle Project Menu",
-    "version": "0.0.1-pre",
+    "name": "com.needle.context-menu",
+    "displayName": "Needle Context Menu",
+    "version": "1.0.0-pre",
+    "description": "Utility that allows to hide and modify project window context menu items",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/needle-tools/needle-context-menu"
+    },
+    "author": {
+        "name": "Needle",
+        "email": "hi@needle.tools",
+        "url": "https://needle.tools"
+    },
     "dependencies": {
         "com.unity.searcher" : "4.9.2"
+    },
+    "category": "Tools",
+    "type": "tool",
+    "publishConfig": {
+        "registry": "https://package.openupm.com"
     }
 }
