@@ -29,9 +29,13 @@ namespace Needle
 		{
 		}
 
-		private bool hiddenItemsFoldout = false;
+		private bool hiddenItemsFoldout
+		{
+			get => SessionState.GetBool("NeedleMenuSettingsProvider.hiddenItemsFoldout", false);
+			set => SessionState.SetBool("NeedleMenuSettingsProvider.hiddenItemsFoldout", value);
+		}
 
-		public override void OnGUI(string searchContext)
+		public override void OnGUI(string searchContext) 
 		{
 			var settings = NeedleMenuSettings.instance;
 			using (var ch = new EditorGUI.ChangeCheckScope())

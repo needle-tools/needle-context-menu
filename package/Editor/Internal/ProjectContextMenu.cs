@@ -9,8 +9,9 @@ namespace Needle
 {
 	public static class ProjectContextMenu
 	{
-		private static readonly object[] beforeOpenArgs = new object[1];
 		private static readonly List<MenuItemInfo> items = new List<MenuItemInfo>();
+		private static IList<ILoadMenu> loadMenu;
+		private static IList<IBeforeOpenMenu> beforeOpenMenu;
 
 		private static readonly string[] skipMenuItems =
 		{
@@ -29,13 +30,16 @@ namespace Needle
 				var display = item.Substring(start);
 				items.Add(new MenuItemInfo(item, new GUIContent(display)));
 			}
-			var modifyArgs = new object[] { items };
-			foreach (var method in TypeCache.GetMethodsWithAttribute<LoadMenu>())
+			
+			beforeOpenMenu = InstanceUtils.GetInstances<IBeforeOpenMenu>();
+			loadMenu = InstanceUtils.GetInstances<ILoadMenu>();
+
+			foreach (var load in loadMenu)
 			{
-				if (method.IsAbstract || !method.IsStatic) continue;
-				method.Invoke(null, modifyArgs);
-			}
+				load.OnModifyCollectedItems(items);
+			} 
 		}
+
 
 		private static void OnGUI(string guid, Rect rect)
 		{
@@ -44,21 +48,18 @@ namespace Needle
 				if (rect.Contains(Event.current.mousePosition))
 				{
 					var projectWindow = ProjectBrowser.s_LastInteractedProjectBrowser;
-					beforeOpenArgs[0] = new Context()
+					var context = new Context()
 					{
 						Guid = guid,
 						Rect = rect,
 						Window = projectWindow,
 						Items = items
 					};
-					foreach (var method in TypeCache.GetMethodsWithAttribute<BeforeOpenMenu>())
+					foreach (var beforeOpen in beforeOpenMenu)
 					{
-						if (method.IsAbstract || !method.IsStatic) continue;
-						var res = method.Invoke(null, beforeOpenArgs);
-						if (res is bool b && !b)
-						{
+						var res = beforeOpen.OnOpenMenu(context);
+						if (res == BeforeOpenMenuResponse.Stop)
 							return;
-						}
 					}
 					Event.current.Use();
 					var settings = NeedleMenuSettings.instance;

@@ -2,10 +2,9 @@
 using Needle;
 using UnityEngine;
 
-internal static class AddCopyGuid
+internal class AddCopyGuid : ILoadMenu
 {
-	[LoadMenu]
-	private static void OnAddCopyGuid(IList<MenuItemInfo> items)
+	public void OnModifyCollectedItems(List<MenuItemInfo> items)
 	{
 		var it = new MenuItemInfo("Add Copy Guid", new GUIContent("Copy Guid"));
 		it.BeforeInvoke += guid =>

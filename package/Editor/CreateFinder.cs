@@ -1,23 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
 using Needle;
-using UnityEditor;
 using UnityEditor.Searcher;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-internal static class CreateFinder
+internal class CreateFinder : IBeforeOpenMenu
 {
 	private static Searcher searcher;
+	
 
-	[BeforeOpenMenu]
-	[UsedImplicitly]
-	private static bool OpenFinder(Context context)
+	public BeforeOpenMenuResponse OnOpenMenu(Context context)
 	{
-		if (Event.current.modifiers.HasFlag(EventModifiers.Alt) == false) return true;
+		if (Event.current.modifiers.HasFlag(EventModifiers.Alt) == false) return BeforeOpenMenuResponse.Continue;
 		
 		if (searcher == null)
 		{
@@ -68,7 +64,7 @@ internal static class CreateFinder
 		w.Focus();
 		
 		Event.current.Use();
-		return false;
+		return BeforeOpenMenuResponse.Stop;
 	}
 
 	private class MyAdapter : SearcherAdapter
