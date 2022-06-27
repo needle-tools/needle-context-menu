@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -15,5 +16,7 @@ namespace Needle
 			Undo.RegisterCompleteObjectUndo(this, "Save Needle Exporter Settings");
 			base.Save(true);
 		}
+
+		public List<string> hidden = new List<string>();
 	}
 }

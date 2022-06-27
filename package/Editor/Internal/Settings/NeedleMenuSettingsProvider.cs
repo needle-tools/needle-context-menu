@@ -29,14 +29,53 @@ namespace Needle
 		{
 		}
 
+		private bool hiddenItemsFoldout = false;
+
 		public override void OnGUI(string searchContext)
 		{
 			var settings = NeedleMenuSettings.instance;
 			using (var ch = new EditorGUI.ChangeCheckScope())
 			{
+				var changed = false;
 				settings.hideInactive = EditorGUILayout.ToggleLeft("Hide Inactive", settings.hideInactive);
 				settings.sortAlphabetical = EditorGUILayout.ToggleLeft("Sort Alphabetical", settings.sortAlphabetical);
-				if (ch.changed)
+
+				using (new EditorGUILayout.HorizontalScope())
+				{
+					hiddenItemsFoldout = EditorGUILayout.Foldout(hiddenItemsFoldout, "Hidden Items");
+					GUILayout.FlexibleSpace();
+					if (GUILayout.Button("All"))
+					{
+						changed = true;
+						foreach(var it in MenuItemApi.GetProjectMenuItems())
+							if (!settings.hidden.Contains(it))
+								settings.hidden.Add(it);
+					}
+					if (GUILayout.Button("None"))
+					{
+						changed = true;
+						settings.hidden.Clear();
+					}
+				}
+				if (hiddenItemsFoldout)
+				{
+					EditorGUI.indentLevel += 1;
+					foreach (var it in MenuItemApi.GetProjectMenuItems())
+					{
+						var visible = !settings.hidden.Contains(it);
+						var newVisible = EditorGUILayout.ToggleLeft(it, visible);
+						if (visible != newVisible)
+						{
+							if(!newVisible)
+								settings.hidden.Add(it);
+							else
+								settings.hidden.Remove(it);
+						}
+					}
+					EditorGUI.indentLevel -= 1;
+				}
+				
+				if (ch.changed || changed)
 				{
 					settings.Save();
 				}

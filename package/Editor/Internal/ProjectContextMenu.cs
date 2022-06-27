@@ -21,7 +21,7 @@ namespace Needle
 		private static void Init()
 		{
 			EditorApplication.projectWindowItemOnGUI += OnGUI;
-			var allItems = Unsupported.GetSubmenus("Assets");
+			var allItems = MenuItemApi.GetProjectMenuItems();
 			var start = "Assets/".Length;
 			foreach (var item in allItems)
 			{
@@ -63,24 +63,47 @@ namespace Needle
 					Event.current.Use();
 					var settings = NeedleMenuSettings.instance;
 					var menu = new GenericMenu();
+					char? lastChar = null;
 					for (var index = 0; index < items.Count; index++)
 					{
 						var it = items[index];
+						if (settings.hidden.Contains(it.Path)) continue;
 						if (!it.OnBeforeDisplay()) continue;
-
-						var isActive = EditorApplication.ValidateMenuItem(it.Path);
+						
+						var isActive = it.Validate();
 						if (!isActive)
 						{
 							if (!settings.hideInactive)
+							{
+								OnBeforeAddItem();
 								menu.AddDisabledItem(it.GUIContent, false);
+							}
 						}
 						else
 						{
+							OnBeforeAddItem();
 							menu.AddItem(it.GUIContent, false, () =>
 							{
-								if (!it.OnBeforeInvoke()) return;
+								if (!it.OnBeforeInvoke(guid)) return;
 								EditorApplication.ExecuteMenuItem(it.Path);
 							});
+						}
+
+						void OnBeforeAddItem()
+						{
+							var displayPath = it.GUIContent.text;
+							var slashIndex = displayPath.LastIndexOf("/", StringComparison.OrdinalIgnoreCase);
+							if (slashIndex > 0 && slashIndex + 1 < displayPath.Length)
+							{
+								var nextChar = displayPath[slashIndex + 1];
+								if (lastChar != null && lastChar != nextChar)
+								{
+									var sep = displayPath.Substring(0, slashIndex +1 );
+									menu.AddSeparator(sep);
+								}
+								lastChar = nextChar;
+							}
+
 						}
 					}
 					menu.ShowAsContext();
