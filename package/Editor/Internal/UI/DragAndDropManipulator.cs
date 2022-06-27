@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.TestTools;
 using UnityEngine.UIElements;
 
 public class DragAndDropManipulator : PointerManipulator
@@ -12,7 +13,7 @@ public class DragAndDropManipulator : PointerManipulator
 	protected override void RegisterCallbacksOnTarget()
 	{
 		target.RegisterCallback<PointerDownEvent>(PointerDownHandler);
-		target.RegisterCallback<PointerMoveEvent>(PointerMoveHandler); 
+		target.RegisterCallback<PointerMoveEvent>(PointerMoveHandler);
 		target.RegisterCallback<PointerUpEvent>(PointerUpHandler);
 		target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
 	}
@@ -25,30 +26,40 @@ public class DragAndDropManipulator : PointerManipulator
 		target.UnregisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
 	}
 
-	private Vector2 targetStartPosition { get; set; }
-	private Vector3 pointerStartPosition { get; set; }
-	private bool enabled { get; set; }
+	private Vector2 targetStartPosition;
+	private Vector3 pointerStartPosition;
+	private Vector2 offset;
+	private bool enabled;
 	private VisualElement root { get; }
 
 	private void PointerDownHandler(PointerDownEvent evt)
 	{
 		targetStartPosition = target.transform.position;
-		pointerStartPosition = evt.position;
 		target.CapturePointer(evt.pointerId);
-		target.style.position = Position.Absolute;
-		root.Add(target);
+
 		enabled = true;
+
+		var worldPos = target.worldBound.position;
+		root.Add(target);
+		target.style.position = Position.Absolute;
+		
+		target.transform.position = root.WorldToLocal(worldPos);
+		pointerStartPosition = target.transform.position;
+		offset = target.transform.position - evt.position;
+		Debug.Log(pointerStartPosition);
 	}
 
 	private void PointerMoveHandler(PointerMoveEvent evt)
 	{
 		if (enabled && target.HasPointerCapture(evt.pointerId))
 		{
-			var pointerDelta = evt.position - pointerStartPosition;
-
-			target.transform.position = new Vector2(
-				Mathf.Clamp(targetStartPosition.x + pointerDelta.x, 0, target.panel.visualTree.worldBound.width),
-				Mathf.Clamp(targetStartPosition.y + pointerDelta.y, 0, target.panel.visualTree.worldBound.height));
+			var pos = evt.position;
+			var pointerDelta = pos - pointerStartPosition;
+			pos = new Vector2(
+				Mathf.Clamp(pointerDelta.x + pointerStartPosition.x, 0, root.panel.visualTree.worldBound.width),
+				Mathf.Clamp(pointerDelta.y + pointerStartPosition.y, 0, root.panel.visualTree.worldBound.height));
+			;
+			target.transform.position = pos;
 		}
 	}
 
@@ -83,6 +94,8 @@ public class DragAndDropManipulator : PointerManipulator
 			enabled = false;
 			closestOverlappingSlot?.Add(target);
 			target.style.position = Position.Relative;
+			target.transform.position = Vector3.zero;
+			target.BringToFront();
 		}
 	}
 
