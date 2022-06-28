@@ -41,7 +41,11 @@ namespace Needle
 
 		public override void OnGUI(string searchContext)
 		{
-			if (menuItems == null) menuItems = new ReorderableMenuItems();
+			if (menuItems == null)
+			{
+				menuItems = new ReorderableMenuItems();
+				menuItems.RequestRepaint += Repaint;
+			}
 			
 			var items = MenuItemApi.GetProjectMenuItems();
 
