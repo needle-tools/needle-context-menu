@@ -1,6 +1,6 @@
 # Custom Context Menu
 
-Allows to hide individual, re-order & search Unity Project context menu items.
+Allows to hide, re-order & search individual Unity Project context menu items.
 
 
 ## Contact ✒️
