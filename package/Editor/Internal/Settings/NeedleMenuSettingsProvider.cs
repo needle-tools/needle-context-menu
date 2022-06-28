@@ -53,17 +53,18 @@ namespace Needle
 						changed = true;
 						settings.hidden.Clear();
 						settings.hidden.AddRange(Recommended.Hidden);
-					if (GUILayout.Button("All"))
-					{
-						changed = true;
-						foreach(var it in MenuItemApi.GetProjectMenuItems())
-							if (!settings.hidden.Contains(it))
-								settings.hidden.Add(it);
-					}
-					if (GUILayout.Button("None"))
-					{
-						changed = true;
-						settings.hidden.Clear();
+						if (GUILayout.Button("All"))
+						{
+							changed = true;
+							foreach (var it in MenuItemApi.GetProjectMenuItems())
+								if (!settings.hidden.Contains(it))
+									settings.hidden.Add(it);
+						}
+						if (GUILayout.Button("None"))
+						{
+							changed = true;
+							settings.hidden.Clear();
+						}
 					}
 				}
 				if (hiddenItemsFoldout)
