@@ -64,21 +64,25 @@ namespace Needle
 				if (hiddenItemsFoldout)
 				{
 					EditorGUI.indentLevel += 1;
+					var disabledColor = new Color(.7f, .7f, .7f);
 					foreach (var it in MenuItemApi.GetProjectMenuItems())
 					{
 						var visible = !settings.hidden.Contains(it);
-						var newVisible = EditorGUILayout.ToggleLeft(it, visible);
-						if (visible != newVisible)
+						using (new ColorScope(visible ? Color.white : disabledColor))
 						{
-							if(!newVisible)
-								settings.hidden.Add(it);
-							else
-								settings.hidden.Remove(it);
+							var newVisible = EditorGUILayout.ToggleLeft(it, visible);
+							if (visible != newVisible)
+							{
+								if (!newVisible)
+									settings.hidden.Add(it);
+								else
+									settings.hidden.Remove(it);
+							}
 						}
 					}
 					EditorGUI.indentLevel -= 1;
 				}
-				
+
 				if (ch.changed || changed)
 				{
 					settings.Save();
