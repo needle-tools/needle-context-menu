@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Needle
 {
@@ -35,8 +37,15 @@ namespace Needle
 			set => SessionState.SetBool("NeedleMenuSettingsProvider.hiddenItemsFoldout", value);
 		}
 
-		public override void OnGUI(string searchContext) 
+		private ReorderableMenuItems menuItems;
+
+		public override void OnGUI(string searchContext)
 		{
+			if (menuItems == null) menuItems = new ReorderableMenuItems();
+			menuItems.Draw();
+			
+			var items = MenuItemApi.GetProjectMenuItems();
+
 			var settings = NeedleMenuSettings.instance;
 			using (var ch = new EditorGUI.ChangeCheckScope())
 			{
@@ -71,7 +80,7 @@ namespace Needle
 				{
 					EditorGUI.indentLevel += 1;
 					var disabledColor = new Color(.7f, .7f, .7f);
-					foreach (var it in MenuItemApi.GetProjectMenuItems())
+					foreach (var it in items)
 					{
 						var visible = !settings.hidden.Contains(it);
 						using (new ColorScope(visible ? Color.white : disabledColor))

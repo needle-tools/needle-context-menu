@@ -15,7 +15,7 @@ public class DragAndDropManipulator : PointerManipulator
 		target.RegisterCallback<PointerDownEvent>(PointerDownHandler);
 		target.RegisterCallback<PointerMoveEvent>(PointerMoveHandler);
 		target.RegisterCallback<PointerUpEvent>(PointerUpHandler);
-		target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
+		target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler); 
 	}
 
 	protected override void UnregisterCallbacksFromTarget()
@@ -28,14 +28,12 @@ public class DragAndDropManipulator : PointerManipulator
 
 	private readonly VisualElement root;
 	private VisualElement startSlot;
-	private Vector2 targetStartPosition;
 	private Vector3 pointerStartPosition;
 	private Vector3 offset;
 	private bool enabled;
 
 	private void PointerDownHandler(PointerDownEvent evt)
 	{
-		targetStartPosition = target.transform.position;
 		target.CapturePointer(evt.pointerId);
 		startSlot = target.parent;
 

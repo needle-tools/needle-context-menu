@@ -16,7 +16,7 @@
         </VisualElement>
         <VisualElement name="slot_row1" class="slot_row">
             <VisualElement name="slot1" class="slot">
-                <Label text="test" name="object2" class="object"/>
+                <Label text="test2" name="object2" class="object"/>
             </VisualElement>
             <VisualElement name="slot2" class="slot"/>
             <VisualElement name="slot1" class="slot"/>
@@ -26,7 +26,7 @@
             <VisualElement name="slot1" class="slot"/>
             <VisualElement name="slot2" class="slot"/>
             <VisualElement name="slot1" class="slot">
-                <Label text="test" name="object" class="object"/>
+                <Label text="test1" name="object" class="object"/>
             </VisualElement>
             <VisualElement name="slot2" class="slot"/>
         </VisualElement>
