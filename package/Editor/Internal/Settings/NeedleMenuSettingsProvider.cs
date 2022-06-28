@@ -48,6 +48,11 @@ namespace Needle
 				{
 					hiddenItemsFoldout = EditorGUILayout.Foldout(hiddenItemsFoldout, "Hidden Items");
 					GUILayout.FlexibleSpace();
+					if (GUILayout.Button("Recommended"))
+					{
+						changed = true;
+						settings.hidden.Clear();
+						settings.hidden.AddRange(Recommended.Hidden);
 					if (GUILayout.Button("All"))
 					{
 						changed = true;
