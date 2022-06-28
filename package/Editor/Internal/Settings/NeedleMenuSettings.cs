@@ -20,6 +20,6 @@ namespace Needle
 
 		public List<string> hidden = new List<string>();
 
-		public List<MenuItemModel> items = new List<MenuItemModel>();
+		public List<MenuItemModel> projectMenuItems = new List<MenuItemModel>();
 	}
 }

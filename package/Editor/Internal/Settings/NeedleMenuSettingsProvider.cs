@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Needle.Utils;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -111,6 +113,7 @@ namespace Needle
 
 				if (ch.changed || changed)
 				{
+					menuItems.Items.SaveAsProjectMenuItems();
 					settings.Save();
 				}
 			}

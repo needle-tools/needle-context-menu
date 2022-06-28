@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Needle.Utils;
 using UnityEditor;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Needle
 {
 	public class ReorderableMenuItems
 	{
+		internal IReadOnlyList<MenuItemElement> Items => items;
+		
 		private ReorderableList reorderableList;
 		private List<MenuItemElement> items;
 		private Rect listRect;
@@ -28,8 +31,7 @@ namespace Needle
 		private void EnsureSetup()
 		{
 			if (reorderableList != null) return;
-			var rawItems = MenuItemApi.GetProjectMenuItems();
-			this.items = MenuItemElement.CreateHierarchy(rawItems).ToFlatList(true);
+			this.items = MenuItemElement.CreateProjectMenuItems();
 
 			// this.items = rawItems.ToList();
 			reorderableList = new ReorderableList(this.items, typeof(MenuItemElement), true, false, false, false);
@@ -99,13 +101,13 @@ namespace Needle
 			}
 
 			if (isDragging) indexEditing = -1;
-			
-			
 			var eventType = Event.current.type;
+			var eventKey = Event.current.keyCode;
+
+			var isInEditMode = indexEditing == index;
 			var item = this.items[index];
 			var shouldUseEvent = false;
 
-			// handle item being reordered
 
 			if (Event.current.type == EventType.Layout)
 			{
@@ -122,7 +124,7 @@ namespace Needle
 
 
 			// if (Event.current.type == EventType.Repaint || Event.current.type == EventType.MouseUp)
-			if (indexEditing == index)
+			if (isInEditMode)
 			{
 				EditorGUI.TextField(rect, item.ComputeFullPath());
 			}
@@ -159,6 +161,16 @@ namespace Needle
 
 			switch (eventType)
 			{
+				case EventType.KeyDown:
+					switch (eventKey)
+					{
+						case KeyCode.Return:
+							indexEditing = -1;
+							RequestRepaint?.Invoke();
+							break;
+					}
+					break;
+				
 				case EventType.Repaint:
 					if (mousePressed && MouseIntersects())
 					{
@@ -181,7 +193,7 @@ namespace Needle
 							indexEditing = index;
 							item.Hidden = indexHiddenState;
 						}
-						else
+						else if(!isInEditMode)
 						{
 							indexEditing = -1;
 							indexClicked = index;
