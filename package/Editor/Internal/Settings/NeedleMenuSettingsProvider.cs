@@ -42,7 +42,6 @@ namespace Needle
 		public override void OnGUI(string searchContext)
 		{
 			if (menuItems == null) menuItems = new ReorderableMenuItems();
-			menuItems.Draw();
 			
 			var items = MenuItemApi.GetProjectMenuItems();
 
@@ -53,6 +52,9 @@ namespace Needle
 				settings.hideInactive = EditorGUILayout.ToggleLeft("Hide Inactive", settings.hideInactive);
 				settings.sortAlphabetical = EditorGUILayout.ToggleLeft("Sort Alphabetical", settings.sortAlphabetical);
 
+				
+				
+				
 				using (new EditorGUILayout.HorizontalScope())
 				{
 					hiddenItemsFoldout = EditorGUILayout.Foldout(hiddenItemsFoldout, "Hidden Items");
@@ -76,8 +78,13 @@ namespace Needle
 						settings.hidden.Clear();
 					}
 				}
+				
 				if (hiddenItemsFoldout)
 				{
+					GUILayout.Space(2);
+					menuItems.Draw();
+
+					
 					EditorGUI.indentLevel += 1;
 					var disabledColor = new Color(.7f, .7f, .7f);
 					foreach (var it in items)

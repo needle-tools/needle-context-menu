@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Needle.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,5 +19,7 @@ namespace Needle
 		}
 
 		public List<string> hidden = new List<string>();
+
+		public List<MenuItemModel> items = new List<MenuItemModel>();
 	}
 }

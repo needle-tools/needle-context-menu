@@ -8,5 +8,10 @@ namespace Needle
 		{
 			return Unsupported.GetSubmenus("Assets");
 		}
+		
+		public static string[] GetProjectMenuItemsCommands()
+		{
+			return Unsupported.GetSubmenusCommands("Assets");
+		}
 	}
 }

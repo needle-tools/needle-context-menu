@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Needle.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ namespace Needle
 		private static IList<ILoadMenu> loadMenu;
 		private static IList<IBeforeOpenMenu> beforeOpenMenu;
 
+		internal static List<MenuItemElement> menuItems = new List<MenuItemElement>();
+
 		private static readonly string[] skipMenuItems =
 		{
 			"Assets/Create/Playables/Playable Asset C# Script "
@@ -25,14 +28,16 @@ namespace Needle
 			while(EditorApplication.isUpdating || EditorApplication.isCompiling) await Task.Delay(100);
 			EditorApplication.projectWindowItemOnGUI += OnGUI;
 			var allItems = MenuItemApi.GetProjectMenuItems();
+
 			var start = "Assets/".Length;
-			foreach (var item in allItems)
+			for (var index = 0; index < allItems.Length; index++)
 			{
+				var item = allItems[index];
 				if (skipMenuItems.Any(i => item.StartsWith(i))) continue;
 				var display = item.Substring(start);
 				items.Add(new MenuItemInfo(item, new GUIContent(display)));
 			}
-			
+
 			beforeOpenMenu = InstanceUtils.GetInstances<IBeforeOpenMenu>();
 			loadMenu = InstanceUtils.GetInstances<ILoadMenu>();
 

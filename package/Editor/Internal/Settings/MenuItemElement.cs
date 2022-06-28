@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEditorInternal.APIUpdaterExtensions;
 using UnityEngine.UIElements;
 
 namespace Needle.Utils
@@ -7,6 +8,8 @@ namespace Needle.Utils
 	public class MenuItemElement
 	{
 		public string Name;
+		public bool Hidden;
+		public string Id;
 		public MenuItemElement Parent;
 		public readonly List<MenuItemElement> Children = new List<MenuItemElement>();
 		public string OriginalPath;
@@ -35,11 +38,21 @@ namespace Needle.Utils
 			Parent = null;
 		}
 
-		public static List<MenuItemElement> CreateHierarchy(IEnumerable<string> items)
+		public static List<MenuItemElement> CreateItemsList()
+		{
+			var allOptions = MenuItemApi.GetProjectMenuItems();
+			var allCommands = MenuItemApi.GetProjectMenuItemsCommands();
+			var list = CreateHierarchy(allOptions, allCommands); 
+			return list.ToFlatList(true);
+		}
+
+		public static List<MenuItemElement> CreateHierarchy(IList<string> items, IList<string> commands = null)
 		{
 			var list = new List<MenuItemElement>();
-			foreach (var item in items)
+			for (var k = 0; k < items.Count; k++)
 			{
+				var item = items[k];
+				var cmd = commands?[k];
 				var elements = item.Split('/');
 				MenuItemElement current = null;
 				for (var index = 0; index < elements.Length; index++)
@@ -51,6 +64,7 @@ namespace Needle.Utils
 					var it = new MenuItemElement();
 					it.Name = part;
 					it.OriginalPath = item;
+					it.Id = cmd;
 					if (current != null && index > 0) current.Add(it);
 					else list.Add(it);
 					current = it;
