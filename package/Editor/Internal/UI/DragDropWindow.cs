@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Needle.Tiny.Utils;
+using Needle;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class DragAndDropWindow : EditorWindow, ICanRebuild
 {
-	[MenuItem("Window/UI Toolkit/Drag And Drop")]
+	[MenuItem("Needle/DrawDrop")]
 	public static void ShowExample()
 	{
 		var wnd = GetWindow<DragAndDropWindow>();

@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Experimental;
 
-namespace Needle.Tiny.Utils
+namespace Needle
 {
 	public interface ICanRebuild
 	{
