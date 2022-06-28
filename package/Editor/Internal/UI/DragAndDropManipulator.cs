@@ -26,16 +26,18 @@ public class DragAndDropManipulator : PointerManipulator
 		target.UnregisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
 	}
 
+	private readonly VisualElement root;
+	private VisualElement startSlot;
 	private Vector2 targetStartPosition;
 	private Vector3 pointerStartPosition;
-	private Vector2 offset;
+	private Vector3 offset;
 	private bool enabled;
-	private VisualElement root { get; }
 
 	private void PointerDownHandler(PointerDownEvent evt)
 	{
 		targetStartPosition = target.transform.position;
 		target.CapturePointer(evt.pointerId);
+		startSlot = target.parent;
 
 		enabled = true;
 
@@ -46,14 +48,13 @@ public class DragAndDropManipulator : PointerManipulator
 		target.transform.position = root.WorldToLocal(worldPos);
 		pointerStartPosition = target.transform.position;
 		offset = target.transform.position - evt.position;
-		Debug.Log(pointerStartPosition);
 	}
 
 	private void PointerMoveHandler(PointerMoveEvent evt)
 	{
 		if (enabled && target.HasPointerCapture(evt.pointerId))
 		{
-			var pos = evt.position;
+			var pos = evt.position + offset;
 			var pointerDelta = pos - pointerStartPosition;
 			pos = new Vector2(
 				Mathf.Clamp(pointerDelta.x + pointerStartPosition.x, 0, root.panel.visualTree.worldBound.width),
@@ -82,14 +83,8 @@ public class DragAndDropManipulator : PointerManipulator
 				allSlots.Where(OverlapsTarget);
 			var closestOverlappingSlot =
 				FindClosestSlot(overlappingSlots);
-			// var closestPos = Vector3.zero;
-			// if (closestOverlappingSlot != null)
-			// {
-			// 	closestPos = RootSpaceOfSlot(closestOverlappingSlot);
-			// 	closestPos = new Vector2(closestPos.x, closestPos.y);
-			// }
-			// target.transform.position =
-			// 	closestOverlappingSlot != null ? closestPos : targetStartPosition;
+
+			if (closestOverlappingSlot == null) closestOverlappingSlot = startSlot;
 
 			enabled = false;
 			closestOverlappingSlot?.Add(target);
