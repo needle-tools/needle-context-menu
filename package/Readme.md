@@ -1,6 +1,7 @@
 # Custom Context Menu
 
-Allows to hide, re-order & search individual Unity Project context menu items.
+Allows to hide, re-order & search individual Unity Project context menu items.  
+Context click with <kbd>Alt</kbd> to open [Unity Searcher ⇡](https://docs.unity3d.com/Packages/com.unity.searcher@latest).
 
 
 ## Contact ✒️
