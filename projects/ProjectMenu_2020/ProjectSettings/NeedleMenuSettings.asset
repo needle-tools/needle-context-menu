@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8078e8cdce8443f99e3d35cc4c0a65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideInactive: 1
+  sortAlphabetical: 1
+  hidden: []
+  projectMenuItems:
+  - Key: Assets/Create/Folder
+    Path: Create/Folder
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/C# Script
+    Path: Create/C# Script
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/2D/Physics Material 2D
+    Path: Create/2D/Physics Material 2D
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Standard Surface Shader
+    Path: Create/Shader/Standard Surface Shader
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Unlit Shader
+    Path: Create/Shader/Unlit Shader
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Image Effect Shader
+    Path: Create/Shader/Image Effect Shader
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Compute Shader
+    Path: Create/Shader/Compute Shader
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Ray Tracing Shader
+    Path: Create/Shader/Ray Tracing Shader
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Shader/Shader Variant Collection
+    Path: Create/Shader/Shader Variant Collection
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Testing/Tests Assembly Folder
+    Path: Create/Testing/Tests Assembly Folder
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Testing/C# Test Script
+    Path: Create/Testing/C# Test Script
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Playables/Playable Behaviour C# Script
+    Path: Create/Playables/Playable Behaviour C# Script
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Assembly Definition
+    Path: Create/Assembly Definition
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Assembly Definition Reference
+    Path: Create/Assembly Definition Reference
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/TextMeshPro/Font Asset
+    Path: Create/TextMeshPro/Font Asset
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/TextMeshPro/Font Asset Variant
+    Path: Create/TextMeshPro/Font Asset Variant
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/TextMeshPro/Sprite Asset
+    Path: Create/TextMeshPro/Sprite Asset
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/TextMeshPro/Color Gradient
+    Path: Create/TextMeshPro/Color Gradient
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/TextMeshPro/Style Sheet
+    Path: Create/TextMeshPro/Style Sheet
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Scene
+    Path: Create/Scene
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Scene Template
+    Path: Create/Scene Template
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Scene Template From Scene
+    Path: Create/Scene Template From Scene
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Prefab
+    Path: Create/Prefab
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Prefab Variant
+    Path: Create/Prefab Variant
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Audio Mixer
+    Path: Create/Audio Mixer
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Material
+    Path: Create/Material
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Lens Flare
+    Path: Create/Lens Flare
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Render Texture
+    Path: Create/Render Texture
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Lightmap Parameters
+    Path: Create/Lightmap Parameters
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Lighting Settings
+    Path: Create/Lighting Settings
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Custom Render Texture
+    Path: Create/Custom Render Texture
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Animator Controller
+    Path: Create/Animator Controller
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Animation
+    Path: Create/Animation
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Animator Override Controller
+    Path: Create/Animator Override Controller
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Avatar Mask
+    Path: Create/Avatar Mask
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Timeline
+    Path: Create/Timeline
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Signal
+    Path: Create/Signal
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Physic Material
+    Path: Create/Physic Material
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/GUI Skin
+    Path: Create/GUI Skin
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Custom Font
+    Path: Create/Custom Font
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/UI Toolkit/Style Sheet
+    Path: Create/UI Toolkit/Style Sheet
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/UI Toolkit/TSS Theme File
+    Path: Create/UI Toolkit/TSS Theme File
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/UI Toolkit/UI Document
+    Path: Create/UI Toolkit/UI Document
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/UI Toolkit/Editor Window
+    Path: Create/UI Toolkit/Editor Window
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Legacy/Cubemap
+    Path: Create/Legacy/Cubemap
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Brush
+    Path: Create/Brush
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Create/Terrain Layer
+    Path: Create/Terrain Layer
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Show in Explorer
+    Path: Show in Explorer
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Open
+    Path: Open
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Delete
+    Path: Delete
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Rename
+    Path: Rename
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Copy Path
+    Path: Copy Path
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Open Scene Additive
+    Path: Open Scene Additive
+    Hidden: 0
+    Index: 0
+  - Key: Assets/View in Package Manager
+    Path: View in Package Manager
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Import New Asset...
+    Path: Import New Asset...
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Import Package/Custom Package...
+    Path: Import Package/Custom Package...
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Export Package...
+    Path: Export Package...
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Find References In Scene
+    Path: Find References In Scene
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Select Dependencies
+    Path: Select Dependencies
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Refresh
+    Path: Refresh
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Reimport
+    Path: Reimport
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Reimport All
+    Path: Reimport All
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Extract From Prefab
+    Path: Extract From Prefab
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Run API Updater...
+    Path: Run API Updater...
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Update UXML Schema
+    Path: Update UXML Schema
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Open C# Project
+    Path: Open C# Project
+    Hidden: 0
+    Index: 0
+  - Key: Assets/Properties...
+    Path: Properties...
+    Hidden: 0
+    Index: 0
