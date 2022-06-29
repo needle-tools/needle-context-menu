@@ -46,7 +46,7 @@ namespace Needle
 
 				using (new EditorGUILayout.HorizontalScope())
 				{
-					hiddenItemsFoldout = EditorGUILayout.Foldout(hiddenItemsFoldout, "Hidden Items");
+					hiddenItemsFoldout = EditorGUILayout.Foldout(hiddenItemsFoldout, "Menu Items");
 					GUILayout.FlexibleSpace();
 					if (GUILayout.Button("Recommended"))
 					{
