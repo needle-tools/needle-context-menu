@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.needle.project-menu": {
+    "com.needle.context-menu": {
       "version": "file:../../../package",
       "depth": 0,
       "source": "local",
@@ -50,10 +50,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.searcher": {
-      "version": "file:com.unity.searcher@4.9.2",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+      "version": "4.9.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
       "version": "1.0.1",
