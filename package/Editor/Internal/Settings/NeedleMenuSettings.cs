@@ -8,6 +8,7 @@ namespace Needle
 	[FilePath("ProjectSettings/NeedleMenuSettings.asset", FilePathAttribute.Location.ProjectFolder)]
 	public class NeedleMenuSettings : ScriptableSingleton<NeedleMenuSettings>
 	{
+		public bool enabled = true;
 		public bool hideInactive = true;
 		public bool sortAlphabetical = true;
 		

@@ -24,7 +24,7 @@ namespace Needle
 			EditorApplication.projectWindowItemOnGUI += OnGUI;
 			var allItems = MenuItemApi.GetProjectMenuItems();
 			var start = "Assets/".Length;
-			foreach (var item in allItems)
+			foreach (var item in allItems) 
 			{
 				if (skipMenuItems.Any(i => item.StartsWith(i))) continue;
 				var display = item.Substring(start);
@@ -47,6 +47,8 @@ namespace Needle
 			{
 				if (rect.Contains(Event.current.mousePosition))
 				{
+					var settings = NeedleMenuSettings.instance;
+					if (!settings.enabled) return;
 					var projectWindow = ProjectBrowser.s_LastInteractedProjectBrowser;
 					var context = new Context()
 					{
@@ -62,7 +64,6 @@ namespace Needle
 							return;
 					}
 					Event.current.Use();
-					var settings = NeedleMenuSettings.instance;
 					var menu = new GenericMenu();
 					char? lastChar = null;
 					for (var index = 0; index < items.Count; index++)

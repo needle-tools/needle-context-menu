@@ -41,6 +41,7 @@ namespace Needle
 			using (var ch = new EditorGUI.ChangeCheckScope())
 			{
 				var changed = false;
+				settings.enabled = EditorGUILayout.ToggleLeft("Enabled", settings.enabled);
 				settings.hideInactive = EditorGUILayout.ToggleLeft("Hide Inactive", settings.hideInactive);
 				settings.sortAlphabetical = EditorGUILayout.ToggleLeft("Sort Alphabetical", settings.sortAlphabetical);
 
